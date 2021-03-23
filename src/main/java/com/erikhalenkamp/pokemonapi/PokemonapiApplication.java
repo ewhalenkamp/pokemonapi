@@ -44,7 +44,7 @@ public class PokemonapiApplication {
 		//if default id is passed, return a list of all basepokemon objects
 		if (idint == 0) {
 			for (BasePokemon pokemon : this.data.getCollection()) {
-				context += pokemon.createJSON(data) + ", ";
+				context += pokemon.createJSON(data, false) + ", ";
 			}
 			context = context.substring(0, context.length()-2);
 			context = "[" + context + "]";
@@ -52,7 +52,7 @@ public class PokemonapiApplication {
 		}
 		//otherwise, get the specific object
 		else {
-			return this.data.getCollection().get(idint-1).createJSON(data);
+			return this.data.getCollection().get(idint-1).createJSON(data, true);
 		}
 	}
 

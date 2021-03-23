@@ -323,7 +323,7 @@ public class BasePokemon {
     * Return Value: all attributes, non-formatted                          *
     ***********************************************************************/
     
-    public String createJSON(DataClass data) {
+    public String createJSON(DataClass data, Boolean isIndividual) {
     	//shameful implementation, but I can't for the life of me find out why Bulbasaur's name is getting truncated
     	if (this.name.equals("lbasaur")) {
     		this.name = "Bulbasaur";
@@ -332,32 +332,36 @@ public class BasePokemon {
     	if (this.name.contains("'")) {
     		this.name = this.name.replaceAll("'", "=");
     	}
-    	String abilityString = "[", moveString = "[";
-    	//NOTE: make dependency for empty ability/movelists to revert to previous pokemon
-    	Boolean checkbool = false;
-    	for (BaseAbility ability : this.possibleAbilities) {
-    		abilityString += "'" + ability.getName() + "', ";
-    		checkbool = true;
+    	String abilityString = "", moveString = "";
+    	if (isIndividual) {
+	    	abilityString = "'possibleabilities': [";
+	    	moveString = "'possiblemoves': [";
+	    	//NOTE: make dependency for empty ability/movelists to revert to previous pokemon
+	    	Boolean checkbool = false;
+	    	for (BaseAbility ability : this.possibleAbilities) {
+	    		abilityString += "'" + ability.getName() + "', ";
+	    		checkbool = true;
+	    	}
+	    	if (checkbool) abilityString = (abilityString.substring(0, abilityString.length() - 2));
+	    	abilityString += "], ";
+	    	checkbool = false;
+	    	for (BaseMove move : this.possibleMoves) {
+	    		moveString += move.createJSON() + ", ";
+	    		checkbool = true;
+	    	}
+	    	if (checkbool) moveString = (moveString.substring(0, moveString.length() - 2));
+	    	moveString += "], ";
     	}
-    	if (checkbool) abilityString = (abilityString.substring(0, abilityString.length() - 2));
-    	abilityString += "]";
-    	checkbool = false;
-    	for (BaseMove move : this.possibleMoves) {
-    		moveString += move.createJSON() + ", ";
-    		checkbool = true;
-    	}
-    	if (checkbool) moveString = (moveString.substring(0, moveString.length() - 2));
-    	moveString += "]";
-    	String type2Text = ", {'name': '" + this.type2 + "', 'rgb': '" + this.colorToString(this.getTypeColor(this.type2)) + "'}";
+    	String type2Text = "";
     	if (this.type2.equals(""))
-    		type2Text = "";
+    		type2Text = ", {'name': '" + this.type2 + "', 'rgb': '" + this.colorToString(this.getTypeColor(this.type2)) + "'}";
     	String context = "{'id': '" + Integer.toString(this.instancenum) + "', 'dexnum': '" + Integer.toString(this.dexnum) + 
         		"', 'name': '" + this.name + "', 'stats': {'basehp': " + Integer.toString(this.basehp) + ", 'baseatk': " + 
     			Integer.toString(this.baseatk) + ", 'basedef': " + Integer.toString(this.basedef) + ", 'basespatk': " + 
         		Integer.toString(this.basespatk) + ", 'basespdef': " + Integer.toString(this.basespdef) + ", 'basespeed': " + 
     			Integer.toString(this.basespeed) + "}, 'types': [{'name': '" + this.type1 + "', 'rgb': '" + 
-        		this.colorToString(this.getTypeColor(this.type1)) + "'}" + type2Text + "], 'description': '" + data.getDexList().get(this.dexnum-1) + "', 'possibleabilities': " + abilityString + 
-    			", 'possiblemoves': " + moveString + ", 'characteristics': {'height': '" + Double.toString(this.height) + 
+        		this.colorToString(this.getTypeColor(this.type1)) + "'}" + type2Text + "], 'description': '" + data.getDexList().get(this.dexnum-1) + 
+        		"', " + abilityString + moveString + "'characteristics': {'height': '" + Double.toString(this.height) + 
     			"', 'weight': '" + Double.toString(this.weight) + "'}}";
     	context = context.replaceAll("'", "\"");
     	context = context.replaceAll("=", "'");
