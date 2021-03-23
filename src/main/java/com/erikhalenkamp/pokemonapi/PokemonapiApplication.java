@@ -47,6 +47,7 @@ public class PokemonapiApplication {
 				context += pokemon.createJSON(data) + ", ";
 			}
 			context = context.substring(0, context.length()-2);
+			context = "[" + context + "]";
 			return context;
 		}
 		//otherwise, get the specific object
