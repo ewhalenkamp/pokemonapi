@@ -325,8 +325,10 @@ public class BasePokemon {
     
     public String createJSON(DataClass data) {
     	//shameful implementation, but I can't for the life of me find out why Bulbasaur's name is getting truncated
-    	if (this.name.equals("lbasaur"))
+    	if (this.name.equals("lbasaur")) {
     		this.name = "Bulbasaur";
+    		System.out.println(this.possibleMoves);
+    	}
     	if (this.name.contains("'")) {
     		this.name = this.name.replaceAll("'", "=");
     	}
@@ -346,12 +348,15 @@ public class BasePokemon {
     	}
     	if (checkbool) moveString = (moveString.substring(0, moveString.length() - 2));
     	moveString += "]";
+    	String type2Text = ", {'name': '" + this.type2 + "', 'rgb': '" + this.colorToString(this.getTypeColor(this.type2)) + "'}";
+    	if (this.type2.equals(""))
+    		type2Text = "";
     	String context = "{'id': '" + Integer.toString(this.instancenum) + "', 'dexnum': '" + Integer.toString(this.dexnum) + 
-        		"', 'name': '" + this.name + "', 'stats': {'basehp': '" + Integer.toString(this.basehp) + "', 'baseatk': '" + 
-    			Integer.toString(this.baseatk) + "', 'basedef': '" + Integer.toString(this.basedef) + "', 'basespatk': '" + 
-        		Integer.toString(this.basespatk) + "', 'basespdef': '" + Integer.toString(this.basespdef) + "', 'basespeed': '" + 
-    			Integer.toString(this.basespeed) + "'}, 'types': {'type1': '" + this.type1 + "', 'type2': '" + this.type2 + 
-    			"'}, 'description': '" + data.getDexList().get(this.dexnum-1) + "', 'possibleabilities': " + abilityString + 
+        		"', 'name': '" + this.name + "', 'stats': {'basehp': " + Integer.toString(this.basehp) + ", 'baseatk': " + 
+    			Integer.toString(this.baseatk) + ", 'basedef': " + Integer.toString(this.basedef) + ", 'basespatk': " + 
+        		Integer.toString(this.basespatk) + ", 'basespdef': " + Integer.toString(this.basespdef) + ", 'basespeed': " + 
+    			Integer.toString(this.basespeed) + "}, 'types': [{'name': '" + this.type1 + "', 'rgb': '" + 
+        		this.colorToString(this.getTypeColor(this.type1)) + "'}" + type2Text + "], 'description': '" + data.getDexList().get(this.dexnum-1) + "', 'possibleabilities': " + abilityString + 
     			", 'possiblemoves': " + moveString + ", 'characteristics': {'height': '" + Double.toString(this.height) + 
     			"', 'weight': '" + Double.toString(this.weight) + "'}}";
     	context = context.replaceAll("'", "\"");
@@ -368,8 +373,23 @@ public class BasePokemon {
     * Return Value: none                                                   *
     ***********************************************************************/
 
+    public String colorToString(ArrayList<Integer> colors) {
+    	if (colors != null) {
+	    	String str = "";
+	    	for (int color : colors) {
+	    		str += Integer.toString(color) + ",";
+	    	}
+	    	System.out.println(str.length());
+	    	str = str.substring(0,str.length()-1);
+	    	
+	    	return str;
+    	}
+    	return "";
+    }
     
     public ArrayList<Integer> getTypeColor(String type) {
+    	if (type == "")
+    		return null;
         ArrayList<Integer> colors = new ArrayList<Integer>();
         if (type.equals("Water")) {
             colors.add(104);

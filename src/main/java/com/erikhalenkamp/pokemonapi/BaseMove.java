@@ -43,7 +43,7 @@ public class BaseMove {
     }
     
     public String createJSON() {
-    	return "{'name': '" + this.displayname + "', 'type': '" + this.getType() + "', 'category': '" + this.getCategory() + "', 'power': '" + Integer.toString(this.getPower()) + "', 'accuracy': '" + Double.toString(this.getAccuracy()) + "'}";
+    	return "{'name': '" + this.displayname + "', 'type': '" + this.getType() + "', 'category': '" + this.getCategory() + "', 'power': '" + Integer.toString(this.getPower()) + "', 'accuracy': '" + Double.toString(this.getAccuracy()) + "', 'pp': '" + Integer.toString(this.getPP()) + "'}";
     }
     
     public String getName() {
