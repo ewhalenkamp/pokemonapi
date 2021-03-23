@@ -352,6 +352,7 @@ public class BasePokemon {
     			", 'possiblemoves': " + moveString + ", 'characteristics': {'height': '" + Double.toString(this.height) + 
     			"', 'weight': '" + Double.toString(this.weight) + "'}}";
     	context = context.replaceAll("'", "\"");
+    	context = context.replaceAll("|", "'");
 		return context;
     }
     
