@@ -351,6 +351,7 @@ public class BasePokemon {
     			"'}, 'description': '" + data.getDexList().get(this.dexnum-1) + "', 'possibleabilities': " + abilityString + 
     			", 'possiblemoves': " + moveString + ", 'characteristics': {'height': '" + Double.toString(this.height) + 
     			"', 'weight': '" + Double.toString(this.weight) + "'}}";
+    	context = context.replaceAll("'", "\"");
 		return context;
     }
     
