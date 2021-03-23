@@ -327,6 +327,9 @@ public class BasePokemon {
     	//shameful implementation, but I can't for the life of me find out why Bulbasaur's name is getting truncated
     	if (this.name.equals("lbasaur"))
     		this.name = "Bulbasaur";
+    	if (this.name.contains("'")) {
+    		this.name = this.name.replaceAll("'", "=");
+    	}
     	String abilityString = "[", moveString = "[";
     	//NOTE: make dependency for empty ability/movelists to revert to previous pokemon
     	Boolean checkbool = false;
