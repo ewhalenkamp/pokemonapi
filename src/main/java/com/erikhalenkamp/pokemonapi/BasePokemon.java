@@ -332,7 +332,7 @@ public class BasePokemon {
     	if (this.name.contains("'")) {
     		this.name = this.name.replaceAll("'", "=");
     	}
-    	String abilityString = "", moveString = "";
+    	String abilityString = "", moveString = "", statsString = "", descriptionString = "";
     	if (isIndividual) {
 	    	abilityString = "'possibleabilities': [";
 	    	moveString = "'possiblemoves': [";
@@ -351,17 +351,18 @@ public class BasePokemon {
 	    	}
 	    	if (checkbool) moveString = (moveString.substring(0, moveString.length() - 2));
 	    	moveString += "], ";
+	    	descriptionString = "'description': '" + data.getDexList().get(this.dexnum-1) + "', ";
+	    	statsString = "'stats': {'basehp': " + Integer.toString(this.basehp) + ", 'baseatk': " + 
+    			Integer.toString(this.baseatk) + ", 'basedef': " + Integer.toString(this.basedef) + ", 'basespatk': " + 
+        		Integer.toString(this.basespatk) + ", 'basespdef': " + Integer.toString(this.basespdef) + ", 'basespeed': " + 
+    			Integer.toString(this.basespeed) + "}, ";
     	}
     	String type2Text = "";
     	if (this.type2.equals(""))
     		type2Text = ", {'name': '" + this.type2 + "', 'rgb': '" + this.colorToString(this.getTypeColor(this.type2)) + "'}";
     	String context = "{'id': '" + Integer.toString(this.instancenum) + "', 'dexnum': '" + Integer.toString(this.dexnum) + 
-        		"', 'name': '" + this.name + "', 'stats': {'basehp': " + Integer.toString(this.basehp) + ", 'baseatk': " + 
-    			Integer.toString(this.baseatk) + ", 'basedef': " + Integer.toString(this.basedef) + ", 'basespatk': " + 
-        		Integer.toString(this.basespatk) + ", 'basespdef': " + Integer.toString(this.basespdef) + ", 'basespeed': " + 
-    			Integer.toString(this.basespeed) + "}, 'types': [{'name': '" + this.type1 + "', 'rgb': '" + 
-        		this.colorToString(this.getTypeColor(this.type1)) + "'}" + type2Text + "], 'description': '" + data.getDexList().get(this.dexnum-1) + 
-        		"', " + abilityString + moveString + "'characteristics': {'height': '" + Double.toString(this.height) + 
+        		"', 'name': '" + this.name + "', " + statsString + "'types': [{'name': '" + this.type1 + "', 'rgb': '" + 
+        		this.colorToString(this.getTypeColor(this.type1)) + "'}" + type2Text + "], " + descriptionString + abilityString + moveString + "'characteristics': {'height': '" + Double.toString(this.height) + 
     			"', 'weight': '" + Double.toString(this.weight) + "'}}";
     	context = context.replaceAll("'", "\"");
     	context = context.replaceAll("=", "'");
