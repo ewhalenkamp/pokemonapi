@@ -6,7 +6,7 @@
 
 This API was created on a Java database I used in previous class projects. It has routing capabilities to list all Pokémon and basic characteristics about them to render the
 main list page of my [Pokédex Website](https://github.com/ewhalenkamp/pokedexwebsitev2). Additionally, by specifying '?id=INSTANCE_NUMBER' in the url, you can get detailed
-information about each Pokémon instance (instance number is not necessarily the same as their Pokédex number, because Pokémon of the same form share the same Pokédex number).
+information about each Pokémon instance (instance number is not necessarily the same as their Pokédex number, because different forms of a single Pokémon share the same Pokédex number).
 
 This project was created in Springboot using JDK 1.8 (since that's the only Java version Heroku's buildpack supports).
 
