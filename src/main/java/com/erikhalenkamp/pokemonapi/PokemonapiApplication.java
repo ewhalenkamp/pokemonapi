@@ -28,7 +28,8 @@ public class PokemonapiApplication {
 	public String getPokemonContext(@RequestParam(value = "id", defaultValue = "0") String id) 
 		throws IOException
 	{
-		this.data = new DataClass();
+		if (this.data == null)
+			this.data = new DataClass();
         //for (BasePokemon pokemon : data.getCollection())
         	//System.out.println(pokemon.createJSON(data));
         
