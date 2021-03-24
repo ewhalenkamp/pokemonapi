@@ -10,6 +10,9 @@ information about each Pokémon instance (instance number is not necessarily the
 
 This project was created in Springboot using JDK 1.8 (since that's the only Java version Heroku's buildpack supports).
 
+If you're wondering why there's no commits, I had to reinitialize the repository in the process of hosting it. Very messy process if you don't know what you're doing. Good
+learning experience.
+
 ### Issues:
 
 Bulbasaur. Pretty much entirely Bulbasaur. I believe there's been some corruption in the .txt files used to generate the database, and for whatever reason Bulbasaur has half
