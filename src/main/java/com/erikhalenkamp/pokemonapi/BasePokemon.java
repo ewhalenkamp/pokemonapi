@@ -357,9 +357,9 @@ public class BasePokemon {
         		Integer.toString(this.basespatk) + ", 'basespdef': " + Integer.toString(this.basespdef) + ", 'basespeed': " + 
     			Integer.toString(this.basespeed) + "}, ";
     	}
-    	String type2Text = "";
+    	String type2Text = ", {'name': '" + this.type2 + "', 'rgb': '" + this.colorToString(this.getTypeColor(this.type2)) + "'}";
     	if (this.type2.equals(""))
-    		type2Text = ", {'name': '" + this.type2 + "', 'rgb': '" + this.colorToString(this.getTypeColor(this.type2)) + "'}";
+    		type2Text = "";
     	String context = "{'id': '" + Integer.toString(this.instancenum) + "', 'dexnum': '" + Integer.toString(this.dexnum) + 
         		"', 'name': '" + this.name + "', " + statsString + "'types': [{'name': '" + this.type1 + "', 'rgb': '" + 
         		this.colorToString(this.getTypeColor(this.type1)) + "'}" + type2Text + "], " + descriptionString + abilityString + moveString + "'characteristics': {'height': '" + Double.toString(this.height) + 

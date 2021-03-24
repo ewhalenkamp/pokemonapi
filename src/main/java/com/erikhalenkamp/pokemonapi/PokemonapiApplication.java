@@ -28,14 +28,7 @@ public class PokemonapiApplication {
 	public String getPokemonContext(@RequestParam(value = "id", defaultValue = "0") String id) 
 		throws IOException
 	{
-		if (this.data == null) {
-			this.data = new DataClass();
-	        this.data.initBasePokemon();
-	        this.data.initBaseAbility();
-	        this.data.initBaseMove();
-	        this.data.initDexDescriptions();
-	        this.data.merge();
-		}
+		this.data = new DataClass();
         //for (BasePokemon pokemon : data.getCollection())
         	//System.out.println(pokemon.createJSON(data));
         
@@ -43,6 +36,8 @@ public class PokemonapiApplication {
 		int idint = Integer.parseInt(id);
 		//if default id is passed, return a list of all basepokemon objects
 		if (idint == 0) {
+			if (!this.data.isBPInit())
+	        	this.data.initBasePokemon();
 			for (BasePokemon pokemon : this.data.getCollection()) {
 				context += pokemon.createJSON(data, false) + ", ";
 			}
@@ -52,6 +47,14 @@ public class PokemonapiApplication {
 		}
 		//otherwise, get the specific object
 		else {
+			if (!this.data.isBPInit())
+	        	this.data.initBasePokemon();
+			if (!this.data.isMerged()) {
+				this.data.initBaseMove();
+				this.data.initBaseAbility();
+				this.data.initDexDescriptions();
+				this.data.merge();
+			}
 			return this.data.getCollection().get(idint-1).createJSON(data, true);
 		}
 	}

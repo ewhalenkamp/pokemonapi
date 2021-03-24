@@ -14,8 +14,18 @@ public class DataClass {
     private ArrayList<BasePokemon> pokedexList = new ArrayList<BasePokemon>();
     private PokemonCollection collection, datacollection;
     private String datapath;
+    private Boolean basepokemoninit = false, merged = false;
+    
     public DataClass() {
         this.datapath = "src/main/resources/static/data/";
+    }
+    
+    public Boolean isBPInit() {
+    	return this.basepokemoninit;
+    }
+    
+    public Boolean isMerged() {
+    	return this.merged;
     }
     
     public ArrayList<BasePokemon> getCollection() {
@@ -36,6 +46,8 @@ public class DataClass {
     
     public void initBasePokemon() 
         throws IOException {
+    	
+    	this.basepokemoninit = true;
         File file = new File(this.datapath + "Pokestats.txt"); 
         Scanner sc = new Scanner(file); 
         
@@ -380,6 +392,7 @@ public class DataClass {
     public void merge() 
         throws IOException
     {
+    	this.merged = true;
         //creating a list of Possible Abilities within each individual BasePokemon object
         
         File file = new File(this.datapath + "PossibleAbilities.txt"); 
