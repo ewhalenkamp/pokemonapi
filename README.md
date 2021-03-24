@@ -18,4 +18,6 @@ learning experience.
 Bulbasaur. Pretty much entirely Bulbasaur. I believe there's been some corruption in the .txt files used to generate the database, and for whatever reason Bulbasaur has half
 of its information truncated. On the website side, I hard-rendered the Bulbasaur template as a temporary measure. I'll have to look into this later.
 
+Most Gen 7 Pokémon are missing information not because of problems with the API, but because of the lack of serialized information in the format I was already using for every other Pokémon. As a result, much of their information is missing from the base .txt files, and default options have replaced their info in the templates.
+
 ~~High latency, check efficiency of data initialization~~
